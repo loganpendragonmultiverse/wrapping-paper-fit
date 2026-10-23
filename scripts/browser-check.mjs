@@ -1,33 +1,10 @@
 import { chromium, firefox, webkit } from "@playwright/test";
-import { createServer } from "node:http";
+import { createStaticTestServer } from "./static-test-server.mjs";
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 import assert from "node:assert/strict";
 const root = process.cwd(),
   slugs = [JSON.parse(await readFile("package.json", "utf8")).name];
-const server = createServer(async (req, res) => {
-  try {
-    const url = decodeURIComponent(req.url.split("?")[0]),
-      file = path.resolve(root, "." + url);
-    if (file !== root && !file.startsWith(root + path.sep)) throw Error();
-    const name = url.endsWith("/") ? path.join(file, "index.html") : file;
-    res.setHeader(
-      "Content-Type",
-      name.endsWith(".js")
-        ? "text/javascript"
-        : name.endsWith(".css")
-          ? "text/css"
-          : "text/html",
-    );
-    res.end(await readFile(name));
-  } catch {
-    res.statusCode = 404;
-    res.end();
-  }
-});
-await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
-const base = `http://127.0.0.1:${server.address().port}`;
-const evidence = [];
 const { execFileSync } = await import("node:child_process");
 execFileSync(
   process.platform === "win32" ? "python" : "python3",
@@ -37,6 +14,22 @@ execFileSync(
   ],
   { stdio: "inherit" },
 );
+const server = await createStaticTestServer([
+  {
+    root,
+    routes: [
+      ["/", "index.html"],
+      ["/index.html", "index.html"],
+      ["/src/core.js", "src/core.js"],
+      ["/src/app.js", "src/app.js"],
+      ["/src/styles.css", "src/styles.css"],
+      ["/.package-qa/index.html", ".package-qa/index.html"],
+    ],
+  },
+]);
+await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+const base = `http://127.0.0.1:${server.address().port}`;
+const evidence = [];
 try {
   for (const slug of slugs) {
     await mkdir(`evidence`, { recursive: true });
