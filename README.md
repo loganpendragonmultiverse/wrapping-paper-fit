@@ -2,7 +2,7 @@
 
 Check an ordinary rectangular gift box with standard meeting end flaps or a generous end allowance. Compare box axes and both sheet orientations. This is a measured cutting plan; materials and folding technique still matter.
 
-This is a small, local-first browser tool for household measurements. Version 1.0.0 is a release candidate until its independent review and package verification are recorded.
+This is a small, local-first browser tool for household measurements.
 
 ## Start in three minutes
 
@@ -27,7 +27,7 @@ Import accepts only this tool’s version 1 schema, at most 100 plans and 1 MB J
 
 ## Wrapping assumptions
 
-Standard meeting flaps require a fold height no greater than cross-width. The paper extends (fold height + supplied overlap)/2 past each box end, before the cut-edge tolerance. Cut along the box is box axis + fold height + overlap + twice the tolerance. The seam direction is twice the cross-section sides + overlap + twice the tolerance. The generous recipe adds one extra cross-width along the box. The supplied overlap applies to both seam and end flaps. For a 30 × 20 × 10 cm box, 3 cm overlap and zero tolerance, a standard 43 × 63 cm cut fits a 65 × 45 cm sheet after rotation. Add practical tolerance for real folds and paper. Select an orientation to inspect its cutting diagram.
+Standard meeting flaps require a fold height no greater than cross-width. The paper extends (fold height + supplied overlap)/2 past each box end, before the cut-edge tolerance. Cut along the box is box axis + fold height + overlap + twice the tolerance. The seam direction is twice the cross-section sides + overlap + twice the tolerance. The generous recipe adds one extra cross-width along the box. The supplied overlap applies to both seam and end flaps. For a 30 Ã— 20 Ã— 10 cm box, 3 cm overlap and zero tolerance, a standard 43 Ã— 63 cm cut fits a 65 Ã— 45 cm sheet after rotation. Add practical tolerance for real folds and paper. Select an orientation to inspect its cutting diagram.
 
 ## Limits
 
@@ -35,15 +35,16 @@ Measurements are rectangular and user supplied. Results cannot establish physica
 
 ## Development and contributions
 
-Node.js 22 or newer and Python 3 are used for tests and packaging. No npm runtime or development dependencies are needed.
+Node.js 22 or newer and Python 3 are used for tests and packaging. Run `npm ci` to install the pinned development tools before running the checks below. The distributed browser app has no runtime dependencies.
 
 ```sh
+npm ci
 npm test
 npm run check
 npm run build
 ```
 
-The build creates `dist/index.html`, `dist/wrapping-paper-fit-1.0.0.zip` and `dist/SHA256SUMS`. See [TESTING.md](TESTING.md), [DEVELOPMENT.md](DEVELOPMENT.md) and [CONTRIBUTING.md](CONTRIBUTING.md). Supported behavior is defined by the tests and documented acceptance flows; browser/platform results belong in the release evidence rather than assumed compatibility claims.
+The build creates `dist/index.html`, `dist/wrapping-paper-fit-1.0.1.zip` and `dist/SHA256SUMS`. See [TESTING.md](TESTING.md), [DEVELOPMENT.md](DEVELOPMENT.md) and [CONTRIBUTING.md](CONTRIBUTING.md). Supported behavior is defined by the tests and documented acceptance flows; browser/platform results belong in the release evidence rather than assumed compatibility claims.
 
 MIT licensed. Fixes and useful ideas are welcome; no response or maintenance schedule is promised.
 
