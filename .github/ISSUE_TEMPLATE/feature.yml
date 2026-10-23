@@ -1,0 +1,9 @@
+name: Feature idea
+description: Suggest a bounded improvement
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: What problem should this solve?
+    validations:
+      required: true

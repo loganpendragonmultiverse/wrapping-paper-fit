@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Rectangular gift boxes, supplied sheet dimensions, seam overlap, practical cut-edge tolerance, box-axis and sheet-orientation comparison with cutting diagrams."
+    />
+    <title>Wrapping Paper Fit</title>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <header>
+      <div class="eyebrow">Logan Pendragon Forge · local tools · v1.0.0</div>
+      <h1>Wrapping Paper Fit</h1>
+      <p class="tagline">Check the sheet before cutting.</p>
+      <p class="intro">
+        Check an ordinary rectangular gift box with standard meeting end flaps
+        or a generous end allowance. Compare box axes and both sheet
+        orientations. This is a measured cutting plan; materials and folding
+        technique still matter.
+      </p>
+    </header>
+    <main>
+      <aside class="controls stack">
+        <section class="panel">
+          <h2>Your measurements</h2>
+          <p class="fine">
+            Use one unit throughout. Changing units keeps the numbers unchanged.
+          </p>
+          <form id="form">
+            <div id="fields" class="fields"></div>
+            <div class="actions">
+              <button type="submit">Calculate plan</button
+              ><button id="save" type="button" class="secondary">
+                Save plan
+              </button>
+            </div>
+          </form>
+          <div class="actions">
+            <button id="example" class="secondary">Load example</button
+            ><button id="export-current" class="secondary">
+              Export current plan
+            </button>
+          </div>
+        </section>
+        <section class="panel">
+          <h2 id="saved-count">Saved plans</h2>
+          <p class="fine">
+            Saved in this browser only. Browser settings, private mode or
+            storage eviction can erase plans. Export backups regularly. Nothing
+            is uploaded.
+          </p>
+          <div class="actions">
+            <button id="export" class="secondary">Export saved plans</button
+            ><label class="sr" for="import">Import backup JSON</label
+            ><input
+              id="import"
+              type="file"
+              accept=".json,application/json"
+              aria-label="Import backup JSON"
+            />
+          </div>
+          <button id="raw" class="secondary" hidden>
+            Download unreadable original</button
+          ><button id="undo" class="secondary" hidden>Undo deletion</button>
+          <div id="saved"></div>
+        </section>
+      </aside>
+      <div class="stack">
+        <div id="storage-alert" class="notice error" role="alert" hidden></div>
+        <div id="notice" class="notice" role="status" aria-live="polite">
+          Example ready. Enter your own measurements to begin.
+        </div>
+        <section id="result" class="panel">
+          <h2 id="plan-title"></h2>
+          <p id="summary" class="result-summary"></p>
+          <p id="plan-info" class="fine"></p>
+          <div class="actions no-print">
+            <button id="print">Print measured guide</button>
+          </div>
+          <h3 id="diagram-title"></h3>
+          <div id="diagram-controls" class="no-print" hidden>
+            <label for="diagram-option">Show this orientation</label
+            ><select id="diagram-option"></select>
+          </div>
+          <p id="diagram-caption" class="fine"></p>
+          <div id="diagram"></div>
+          <div
+            id="details"
+            class="table-wrap"
+            tabindex="0"
+            aria-label="Measurement results"
+          ></div>
+          <h3>Before you use this plan</h3>
+          <p id="assumptions" class="fine"></p>
+          <p class="print-note">
+            Printed guide: use the numeric measurements. This schematic is not
+            to scale. Check measurements on the actual object before cutting or
+            drilling.
+          </p>
+        </section>
+      </div>
+    </main>
+    <footer>
+      Works without an account or network request. Source and license are
+      included in the download. Save important plans as JSON backups.
+      <a href="https://github.com/loganpendragonmultiverse/wrapping-paper-fit"
+        >Project source</a
+      >
+    </footer>
+    <dialog id="confirm" aria-labelledby="confirm-title">
+      <h2 id="confirm-title"></h2>
+      <p id="confirm-text"></p>
+      <div class="actions">
+        <button id="confirm-cancel" class="secondary">Cancel</button
+        ><button id="confirm-apply">Confirm change</button>
+      </div>
+    </dialog>
+    <script type="module" src="src/app.js"></script>
+  </body>
+</html>

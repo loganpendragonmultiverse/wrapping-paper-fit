@@ -1,0 +1,10 @@
+name: Bug report
+description: Report a reproducible problem with synthetic data
+body:
+  - type: textarea
+    id: report
+    attributes:
+      label: What happened and what did you expect?
+      description: Include tool/browser version and synthetic measurements. Do not attach private backups.
+    validations:
+      required: true

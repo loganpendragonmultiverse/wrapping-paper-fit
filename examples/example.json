@@ -1,0 +1,17 @@
+{
+  "tool": "wrapping-paper-fit",
+  "version": 1,
+  "plans": [
+    {
+      "name": "Book box",
+      "unit": "cm",
+      "length": 30,
+      "width": 20,
+      "height": 10,
+      "sheetw": 70,
+      "sheeth": 100,
+      "overlap": 3,
+      "tolerance": 1
+    }
+  ]
+}
