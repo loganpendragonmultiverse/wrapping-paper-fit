@@ -3,14 +3,16 @@ import { createStaticTestServer } from "./static-test-server.mjs";
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 import assert from "node:assert/strict";
+const metadata = JSON.parse(await readFile("package.json", "utf8"));
 const root = process.cwd(),
-  slugs = [JSON.parse(await readFile("package.json", "utf8")).name];
+  slugs = [metadata.name];
 const { execFileSync } = await import("node:child_process");
 execFileSync(
   process.platform === "win32" ? "python" : "python3",
   [
     "-c",
-    "import pathlib,zipfile; z=next(pathlib.Path('.').glob('dist/*-1.0.0.zip')); zipfile.ZipFile(z).extractall('.package-qa')",
+    "import sys,zipfile; zipfile.ZipFile(sys.argv[1]).extractall('.package-qa')",
+    path.join("dist", `${metadata.name}-${metadata.version}.zip`),
   ],
   { stdio: "inherit" },
 );
